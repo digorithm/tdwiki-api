@@ -5,8 +5,9 @@
                  [metosin/compojure-api "0.23.0"]
                  [mysql/mysql-connector-java "5.1.25"]
                  [org.clojure/java.jdbc "0.3.5"]
-                 [org.clojure/data.json "0.2.6"]]
-  :ring {:handler compojure.api.examples.handler/app}
+                 [org.clojure/data.json "0.2.6"]
+                 [io.aviso/pretty "0.1.20"]]
+  :ring {:handler compojure.api.core.handler/app}
   :uberjar-name "examples.jar"
   :uberwar-name "examples.war"
   :profiles {:uberjar {:resource-paths ["swagger-ui"]

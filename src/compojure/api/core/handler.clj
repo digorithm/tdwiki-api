@@ -33,7 +33,16 @@
     (GET* "/:id/indicators" []
       :summary "Gets the indicators of a given Technical Debt"
       :path-params [id :- Long]
-      (ok (get-td-indicators id))))
+      (ok (get-td-indicators id)))
+    
+    (POST* "/" [td-name td-definition people-on-it]
+      :body-params  [td-name        :- s/Str,
+                     td-definition  :- s/Str,
+                     people-on-it   :- Integer]
+      :summary      "Insert a new technical debt in the database"
+      (ok (add-technical-debt {:name td-name
+                               :definition td-definition
+                               :people-on-it people-on-it}))))
   
   (context* "/cause" []
     :tags ["cause"]
@@ -45,7 +54,12 @@
     (GET* "/:id" []
       :summary "Gets Technical Debts's cause by ID"
       :path-params [id :- Long]
-      (ok (get-cause id))))
+      (ok (get-cause id)))
+    
+    (POST* "/" [cause-name]
+      :body-params  [cause-name :- s/Str]
+      :summary      "Insert a new cause in the database"
+      (ok (add-cause {:name cause-name}))))
   
   (context* "/indicator" []
     :tags ["indicator"]
@@ -57,4 +71,9 @@
     (GET* "/:id" []
       :summary "Gets Technical Debts's indicator by ID"
       :path-params [id :- Long]
-      (ok (get-indicator id)))))
+      (ok (get-indicator id)))
+  
+    (POST* "/" [indicator-name]
+      :body-params  [indicator-name :- s/Str]
+      :summary      "Insert a new indicator in the database"
+      (ok (add-indicator {:name indicator-name})))))

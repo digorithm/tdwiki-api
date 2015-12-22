@@ -32,3 +32,23 @@
   (j/query mysql-db ["select relevance, name from td_causes 
                      join cause on cause.idcause = td_causes.idcause 
                      where td_causes.idtechnical_debt = ? " tdid]))
+
+(defn add-cause [cause]
+  (j/insert! mysql-db :cause
+             {:name (get cause :name)}))
+
+(defn add-indicator [indicator]
+  (j/insert! mysql-db :indicator
+             {:name (get indicator :name)}))
+
+(defn add-technical-debt [td]
+  (j/insert! mysql-db :technical_debt
+             {:name (get td :name)
+              :definition (get td :definition)
+              :people_on_it (get td :people-on-it)}))
+
+; TODO: token based auth
+; TODO: get references, insert references
+; TODO: crud suggestions
+; TODO: crud requests
+; TODO: crud users
